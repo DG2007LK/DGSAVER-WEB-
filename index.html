@@ -5,10 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="theme-color" content="#07080f">
 <title>DG SAVER — All Social Media Downloader For Free</title>
-
-  <meta name="monetag" content="4428ebfc1f9016f913c32b67de68fb06">
-
-  
+<meta name="monetag" content="4428ebfc1f9016f913c32b67de68fb06">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -138,6 +135,50 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast svg{width:16px;height:16px;color:var(--ok);flex:none}
 .dl .go .spinner{width:11px;height:11px;border-width:2px;border-top-color:#fff;border-color:rgba(255,255,255,.3);border-top-color:#fff}
+
+/* ============ AD SLOT STYLES ============ */
+.ad-slot{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:680px;
+  margin:28px auto;
+  padding:0 20px;
+  min-height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:14px;
+  overflow:hidden;
+  transition:all .3s;
+}
+.ad-slot::before{
+  content:'SPONSORED';
+  position:absolute;
+  top:6px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:8.5px;
+  letter-spacing:1.5px;
+  font-weight:800;
+  color:var(--txt-dim);
+  opacity:.55;
+  pointer-events:none;
+}
+.ad-slot iframe,
+.ad-slot ins,
+.ad-slot img{
+  max-width:100% !important;
+  border-radius:10px !important;
+  display:block;
+}
+.ad-slot-bottom{
+  margin-top:30px;
+  margin-bottom:10px;
+  min-height:50px;
+  opacity:.9;
+}
+.ad-slot-bottom::before{content:'ADS'}
 </style>
 </head>
 <body>
@@ -191,6 +232,13 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
   <div id="status"></div>
   <div id="result"></div>
 
+  <!-- ===================================================== -->
+  <!-- ✅ AD SLOT 1: ABOVE "HOW IT WORKS" -->
+  <!-- ===================================================== -->
+  <div class="ad-slot" id="adSlotTop">
+    <script>(function(s){s.dataset.zone='12048751',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  </div>
+
   <section class="howto">
     <h2>How <span class="grad">It Works</span></h2>
     <p class="lead">Four simple steps to download any video from any platform</p>
@@ -201,6 +249,14 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
       <div class="step"><div class="step-num">04</div><h3>Save Your File</h3><p>Select your preferred quality or format, and the file will download automatically.</p></div>
     </div>
   </section>
+
+  <!-- ===================================================== -->
+  <!-- ✅ AD SLOT 2: BELOW "HOW IT WORKS" -->
+  <!-- ===================================================== -->
+  <div class="ad-slot" id="adSlotMiddle">
+    <script>(function(s){s.dataset.zone='12048751',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  </div>
+
 </main>
 
 <footer>
@@ -208,9 +264,16 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
   <p>© 2025 DG SAVER · All rights reserved<br>For personal use only. All trademarks belong to their respective owners.</p>
 </footer>
 
+<!-- ===================================================== -->
+<!-- ✅ AD SLOT 3: VERY BOTTOM OF THE PAGE -->
+<!-- ===================================================== -->
+<div class="ad-slot ad-slot-bottom" id="adSlotBottom">
+  <script>(function(s){s.dataset.zone='12048751',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+</div>
+
 <script>
 /* =========================================================
-   DG SAVER — JavaScript (fixed)
+   DG SAVER — JavaScript (all previous logic kept intact)
    ========================================================= */
 const API_KEY = 'kcey_3aac11b6ed5c49a5b3b0a2a2922a38de4014';
 const TIKTOK_API_BASE = 'https://tiktok-api-new-vercel.vercel.app';
@@ -225,7 +288,6 @@ const YTMP4_KEY  = 'supun-6senhznz07sw1zzfkn8yf768';
 const PINTEREST_BASE = 'https://supunofc.site/api/download/down/pin/dl';
 const PINTEREST_KEY  = 'supun-6senhznz07sw1zzfkn8yf768';
 
-/* CORS proxies — reordered for reliability */
 const CORS_PROXIES = [
   (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
   (u) => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
@@ -234,7 +296,6 @@ const CORS_PROXIES = [
   (u) => `https://thingproxy.freeboard.io/fetch/${u}`
 ];
 
-/* Hosts known to block CORS (skip direct fetch) */
 const CORS_BLOCKED_HOSTS = ['googlevideo.com','pinimg.com','fbcdn.net','cdninstagram.com','tiktokcdn.com','scdn.co','akamaized.net','ytimg.com'];
 
 const PLATFORMS = {
@@ -268,17 +329,17 @@ const SVG_VIDEO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 const SVG_IMAGE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
 const SVG_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 
-/* ============ THEME ============ */
+/* THEME */
 function setTheme(t){htmlEl.setAttribute('data-theme',t);localStorage.setItem('dgsaver-theme',t);const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='light'?'#f5f6fb':'#07080f');}
 function initTheme(){const s=localStorage.getItem('dgsaver-theme');if(s==='light'||s==='dark'){setTheme(s);return;}setTheme(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');}
 themeBtn.addEventListener('click',()=>setTheme(htmlEl.getAttribute('data-theme')==='dark'?'light':'dark'));
 
-/* ============ PLATFORM SWITCH ============ */
+/* PLATFORM SWITCH */
 function setPlatform(name,skipSave){if(!PLATFORMS[name])return;if(!skipSave&&currentPlatform)platformUrls[currentPlatform]=input.value;currentPlatform=name;input.value=platformUrls[name]||'';platformsEl.querySelectorAll('.platform-btn').forEach(b=>b.classList.toggle('active',b.dataset.p===name));resultEl.className='';resultEl.innerHTML='';showStatus('none');}
 platformsEl.addEventListener('click',e=>{const btn=e.target.closest('.platform-btn');if(!btn)return;if(btn.dataset.p===currentPlatform)return;setPlatform(btn.dataset.p);input.focus();});
 input.addEventListener('input',()=>{platformUrls[currentPlatform]=input.value;});
 
-/* ============ HELPERS ============ */
+/* HELPERS */
 function showStatus(type,msg){if(!type||type==='none'){statusEl.className='';statusEl.innerHTML='';return;}statusEl.className='show';if(type==='loading')statusEl.innerHTML=`<div class="status-box load"><div class="spinner"></div><div>${msg}</div></div>`;else if(type==='error')statusEl.innerHTML=`<div class="status-box err"><div>⚠️</div><div>${msg}</div></div>`;}
 function setLoading(on){downloadBtn.disabled=on;downloadBtn.classList.toggle('loading',on);downloadBtnText.textContent=on?'Loading...':'Download';}
 function fmtNum(n){n=Number(n)||0;if(n>=1e9)return (n/1e9).toFixed(1).replace('.0','')+'B';if(n>=1e6)return (n/1e6).toFixed(1).replace('.0','')+'M';if(n>=1e3)return (n/1e3).toFixed(1).replace('.0','')+'K';return String(n);}
@@ -291,15 +352,10 @@ function dlRow(href,iconSvg,title,sub,cta){return `<a class="dl" href="${esc(hre
 function showResult(html){resultEl.innerHTML=html;resultEl.className='show';setTimeout(()=>resultEl.scrollIntoView({behavior:'smooth',block:'start'}),80);}
 function getYouTubeId(url){if(!url)return null;const m=String(url).match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/))([\w-]{11})/);return m?m[1]:null;}
 function hasAudioTrack(url){if(!url)return false;const s=String(url);if(/[?&]itag=18([&]|$)/.test(s))return true;if(/[?&]itag=22([&]|$)/.test(s))return true;if(/ratebypass=yes/.test(s))return true;return false;}
-
 function toast(msg,ok){const el=document.createElement('div');el.className='toast';el.innerHTML=(ok?SVG_CHECK:'⚠️')+`<span>${esc(msg)}</span>`;document.body.appendChild(el);requestAnimationFrame(()=>el.classList.add('show'));setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),320);},2600);}
 
-/* =========================================================
-   DOWNLOAD HELPERS (NEW)
-   ========================================================= */
-function needsProxy(url){
-  try{const host=new URL(url).hostname.toLowerCase();return CORS_BLOCKED_HOSTS.some(h=>host.includes(h));}catch(_){return false;}
-}
+/* DOWNLOAD HELPERS */
+function needsProxy(url){try{const host=new URL(url).hostname.toLowerCase();return CORS_BLOCKED_HOSTS.some(h=>host.includes(h));}catch(_){return false;}}
 function guessFilename(url,fallback){
   try{
     const u=new URL(url);
@@ -314,60 +370,30 @@ function guessFilename(url,fallback){
   }catch(_){}
   return (fallback||`DG_SAVER_${Date.now()}`)+'.mp4';
 }
-function downloadBlob(blob,filename){
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download=filename;a.style.display='none';
-  document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),120000);
-}
-async function fetchWithTimeout(url,opts={},timeout=15000){
-  const ctrl=new AbortController();
-  const t=setTimeout(()=>ctrl.abort(),timeout);
-  try{const res=await fetch(url,{...opts,signal:ctrl.signal});clearTimeout(t);return res;}
-  catch(e){clearTimeout(t);throw e;}
-}
+function downloadBlob(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),120000);}
+async function fetchWithTimeout(url,opts={},timeout=15000){const ctrl=new AbortController();const t=setTimeout(()=>ctrl.abort(),timeout);try{const res=await fetch(url,{...opts,signal:ctrl.signal});clearTimeout(t);return res;}catch(e){clearTimeout(t);throw e;}}
 async function fetchAsBlob(url){
-  // Direct fetch (skip if host known to block CORS)
   if(!needsProxy(url)){
-    try{
-      const res=await fetchWithTimeout(url,{mode:'cors',credentials:'omit'},8000);
-      if(res.ok){const b=await res.blob();if(b&&b.size>200)return b;}
-    }catch(_){}
+    try{const res=await fetchWithTimeout(url,{mode:'cors',credentials:'omit'},8000);if(res.ok){const b=await res.blob();if(b&&b.size>200)return b;}}catch(_){}
   }
-  // Try proxies with timeout per attempt
   for(let i=0;i<CORS_PROXIES.length;i++){
-    try{
-      const pUrl=CORS_PROXIES[i](url);
-      const res=await fetchWithTimeout(pUrl,{credentials:'omit'},20000);
-      if(!res.ok)continue;
-      const b=await res.blob();
-      if(b&&b.size>200)return b;
-    }catch(_){continue;}
+    try{const pUrl=CORS_PROXIES[i](url);const res=await fetchWithTimeout(pUrl,{credentials:'omit'},20000);if(!res.ok)continue;const b=await res.blob();if(b&&b.size>200)return b;}catch(_){continue;}
   }
   throw new Error('All download methods failed');
 }
 async function directDownload(url,rowEl,fallbackName){
   if(rowEl&&rowEl.classList.contains('downloading'))return;
   const filename=guessFilename(url,fallbackName);
-
   const setState=(icon,text)=>{if(!rowEl)return;const go=rowEl.querySelector('.go');if(go)go.innerHTML=icon?`${icon}<span>${text}</span>`:`<div class="spinner"></div><span>${text}</span>`;};
-
   if(rowEl){rowEl.classList.add('downloading');setState(null,'...');}
   try{
     const blob=await fetchAsBlob(url);
     setState(null,'Save');
     downloadBlob(blob,filename);
     toast('Download started ✓',true);
-    if(rowEl){
-      rowEl.classList.remove('downloading');
-      rowEl.classList.add('done');
-      setState(SVG_CHECK,'Done');
-      setTimeout(()=>{rowEl.classList.remove('done');setState(SVG_ARROW,'GET');},2200);
-    }
+    if(rowEl){rowEl.classList.remove('downloading');rowEl.classList.add('done');setState(SVG_CHECK,'Done');setTimeout(()=>{rowEl.classList.remove('done');setState(SVG_ARROW,'GET');},2200);}
   }catch(e){
     if(rowEl){rowEl.classList.remove('downloading');setState(SVG_ARROW,'GET');}
-    // Fallback: open in new tab
     toast('Opening in new tab...',false);
     try{window.open(url,'_blank','noopener');}catch(_){}
   }
@@ -381,20 +407,13 @@ document.addEventListener('click',e=>{
   directDownload(link.href,link,safe);
 });
 
-/* =========================================================
-   RENDERERS
-   ========================================================= */
+/* RENDERERS */
 function renderFacebook(data){
   const md=data.metadata||{},dl=data.downloads||{};
   const links=Array.isArray(dl.links)?dl.links:[];
   let html=thumbBlock(dl.thumbnail||'',md.duration);
   html+=`<div class="meta"><h2>${esc(md.title||'Facebook Video')}</h2><div class="author">👤 ${esc(md.author||'Unknown')}</div></div>`;
-  html+=statBlock([
-    md.view_count?{n:fmtNum(md.view_count),l:'Views'}:null,
-    md.like_count?{n:fmtNum(md.like_count),l:'Likes'}:null,
-    md.comment_count?{n:fmtNum(md.comment_count),l:'Comments'}:null,
-    md.resolution?{n:esc(md.resolution),l:'Resolution'}:null
-  ]);
+  html+=statBlock([md.view_count?{n:fmtNum(md.view_count),l:'Views'}:null,md.like_count?{n:fmtNum(md.like_count),l:'Likes'}:null,md.comment_count?{n:fmtNum(md.comment_count),l:'Comments'}:null,md.resolution?{n:esc(md.resolution),l:'Resolution'}:null]);
   if(links.length){html+=`<div class="sec-title">Download Options</div>`;links.forEach(l=>{if(!l||!l.url)return;const q=String(l.quality||'HD');html+=dlRow(l.url,qualityIcon(q),`${esc(q)} Video`,'MP4 · Watermark-free');});}
   else html+=`<div class="status-box err" style="margin-top:14px"><div>⚠️</div><div>No download links found</div></div>`;
   showResult(html);
@@ -429,94 +448,57 @@ function renderTikTok(data){
   else html+=`<div class="status-box err" style="margin-top:14px"><div>⚠️</div><div>No download links found</div></div>`;
   showResult(html);
 }
-
-/* =========================================================
-   PINTEREST — fixed detection & prioritization
-   ========================================================= */
 function renderPinterest(data){
   if(!data||data.success===false){showResult(`<div class="status-box err"><div>⚠️</div><div>${esc(data?.message||data?.error||'Could not fetch Pinterest pin')}</div></div>`);return;}
   const r=data.result||data.data||data;
-
   const thumb = r.thumbnail||r.cover||r.image||'';
   const author = r.author||r.username||'';
-
-  // Collect items from every possible array field
   let items=[];
   if(Array.isArray(r.downloads))items=items.concat(r.downloads);
   if(Array.isArray(r.items))items=items.concat(r.items);
   if(Array.isArray(r.medias))items=items.concat(r.medias);
   if(Array.isArray(r.videos))items=items.concat(r.videos);
   if(Array.isArray(r.images))items=items.concat(r.images);
-
-  // Also check for a single direct video URL
   const directVid = r.video||r.videoUrl||r.mp4||'';
   if(directVid)items.push({url:directVid,type:'MP4',mediaType:'video',quality:r.quality||'HD'});
-
-  const videos=[];
-  const images=[];
+  const videos=[],images=[];
   items.forEach(item=>{
     if(!item)return;
     const url=item.url||item.download||item.downloadUrl||item.direct||item.link||item.src||'';
     if(!url)return;
     const type=String(item.type||item.ext||'').toUpperCase();
     const mt=String(item.mediaType||item.media_type||'').toLowerCase();
-    const isVideo =
-      type==='MP4'||type==='WEBM'||type==='MOV'||type==='VIDEO'||
-      mt==='video'||
-      /\.(mp4|webm|mov)(\?|$)/i.test(url)||
-      /\/videos?\//i.test(url)||
-      /v1\.pinimg\.com\/videos/i.test(url);
+    const isVideo = type==='MP4'||type==='WEBM'||type==='MOV'||type==='VIDEO'||mt==='video'||/\.(mp4|webm|mov)(\?|$)/i.test(url)||/\/videos?\//i.test(url)||/v1\.pinimg\.com\/videos/i.test(url);
     if(isVideo)videos.push({url,...item});
     else images.push({url,...item});
   });
-
-  // Parse "736p (64.64 kb)" → sort descending
   const parseRes=(q)=>{const m=String(q||'').match(/(\d{3,4})/);return m?parseInt(m[1],10):0;};
   images.sort((a,b)=>parseRes(b.quality||b.type)-parseRes(a.quality||a.type));
   videos.sort((a,b)=>parseRes(b.quality)-parseRes(a.quality));
-
   let html=thumbBlock(thumb,'');
   html+=`<div class="meta"><h2>Pinterest Media</h2><div class="author">${author?`👤 @${esc(author)}`:'📌 Pinterest'}</div></div>`;
-
   if(videos.length){
     html+=`<div class="sec-title">Video Download</div>`;
-    videos.forEach(item=>{
-      const q=item.quality||item.type||'HD';
-      const sub = item.size ? `MP4 · ${esc(item.size)}` : 'MP4 · Direct download';
-      html+=dlRow(item.url,SVG_VIDEO,`${esc(q)} Video`,sub);
-    });
+    videos.forEach(item=>{const q=item.quality||item.type||'HD';const sub=item.size?`MP4 · ${esc(item.size)}`:'MP4 · Direct download';html+=dlRow(item.url,SVG_VIDEO,`${esc(q)} Video`,sub);});
   }
   if(images.length){
     html+=`<div class="sec-title">Image Download</div>`;
-    images.forEach(item=>{
-      const q=item.quality||item.type||'Original';
-      const type=String(item.type||item.ext||'JPG').toUpperCase();
-      const ext=type==='JPG'||type==='JPEG'||type==='PNG'||type==='WEBP'?type:'JPG';
-      html+=dlRow(item.url,SVG_IMAGE,`${esc(q)} Image`,`${ext} · Full resolution`);
-    });
+    images.forEach(item=>{const q=item.quality||item.type||'Original';const type=String(item.type||item.ext||'JPG').toUpperCase();const ext=type==='JPG'||type==='JPEG'||type==='PNG'||type==='WEBP'?type:'JPG';html+=dlRow(item.url,SVG_IMAGE,`${esc(q)} Image`,`${ext} · Full resolution`);});
   }
-  if(!videos.length&&!images.length){
-    html+=`<div class="status-box err" style="margin-top:14px"><div>⚠️</div><div>No download links found</div></div>`;
-  }
+  if(!videos.length&&!images.length){html+=`<div class="status-box err" style="margin-top:14px"><div>⚠️</div><div>No download links found</div></div>`;}
   showResult(html);
 }
-
 function renderYtmp3(data){
   const audioUrl=data.download||'';
   const bitrate=data.bitrate?(data.bitrate>1000?Math.round(data.bitrate/1000)+' kbps':data.bitrate+' kbps'):'';
   if(!audioUrl){showResult(`<div class="status-box err"><div>⚠️</div><div>${esc(data?.message||'Could not fetch audio')}</div></div>`);return;}
   let html=thumbBlock(data.thumbnail||'',fmtDur(data.duration||0));
   html+=`<div class="meta"><h2>${esc(data.title||'YouTube Audio')}</h2><div class="author">🎧 YouTube Audio</div></div>`;
-  html+=statBlock([
-    data.quality?{n:esc(data.quality),l:'Format'}:null,
-    bitrate?{n:esc(bitrate),l:'Bitrate'}:null,
-    data.duration?{n:fmtDur(data.duration),l:'Duration'}:null
-  ]);
+  html+=statBlock([data.quality?{n:esc(data.quality),l:'Format'}:null,bitrate?{n:esc(bitrate),l:'Bitrate'}:null,data.duration?{n:fmtDur(data.duration),l:'Duration'}:null]);
   html+=`<div class="sec-title">Download Options</div>`;
   html+=dlRow(audioUrl,SVG_AUDIO,'MP3 / M4A Audio',bitrate?`Audio only · ${bitrate}`:'Audio only');
   showResult(html);
 }
-
 function renderYtmp4(data){
   const results=data.result||[];
   const info=data._info||{};
@@ -529,11 +511,7 @@ function renderYtmp4(data){
   const enriched=results.map(item=>({...item,_hasAudio:hasAudioTrack(item.downloadUrl||'')}));
   enriched.sort((a,b)=>(b._hasAudio?1:0)-(a._hasAudio?1:0));
   const audioCount=enriched.filter(x=>x._hasAudio).length;
-  html+=statBlock([
-    {n:String(results.length),l:'Qualities'},
-    {n:String(audioCount),l:'With Audio'},
-    {n:'MP4',l:'Format'}
-  ]);
+  html+=statBlock([{n:String(results.length),l:'Qualities'},{n:String(audioCount),l:'With Audio'},{n:'MP4',l:'Format'}]);
   html+=`<div class="sec-title">Download Options</div>`;
   enriched.forEach(item=>{
     const res=item.resolution||'Video';
@@ -547,7 +525,6 @@ function renderYtmp4(data){
   });
   showResult(html);
 }
-
 function renderSpotify(data){
   if(!data||data.status===false){showResult(`<div class="status-box err"><div>⚠️</div><div>${esc(data?.message||data?.error||'Could not fetch Spotify track')}</div></div>`);return;}
   const d=data.data||data.result||data;
@@ -556,19 +533,13 @@ function renderSpotify(data){
   const audioUrl=d.download||d.downloadUrl||d.url||d.audio||d.mp3||d.link||'';
   let html=thumbBlock(thumb,fmtDur(duration));
   html+=`<div class="meta"><h2>${esc(String(d.title||d.name||d.track||'Spotify Track').substring(0,160))}</h2><div class="author">🎤 ${esc(d.artist||d.artists||d.author||d.uploader||'Spotify')}${d.album?' · '+esc(d.album):''}</div></div>`;
-  html+=statBlock([
-    d.quality?{n:esc(d.quality),l:'Format'}:null,
-    duration?{n:fmtDur(duration),l:'Duration'}:null,
-    d.bitrate?{n:esc(d.bitrate),l:'Bitrate'}:null
-  ]);
+  html+=statBlock([d.quality?{n:esc(d.quality),l:'Format'}:null,duration?{n:fmtDur(duration),l:'Duration'}:null,d.bitrate?{n:esc(d.bitrate),l:'Bitrate'}:null]);
   if(audioUrl){html+=`<div class="sec-title">Download Options</div>`;html+=dlRow(audioUrl,SVG_AUDIO,'Spotify Audio','MP3 · High quality');}
   else html+=`<div class="status-box err" style="margin-top:14px"><div>⚠️</div><div>No audio link found</div></div>`;
   showResult(html);
 }
 
-/* =========================================================
-   API CALLS
-   ========================================================= */
+/* API CALLS */
 async function callTikTokApi(url){
   const r=await fetch(`${TIKTOK_API_BASE}/api/download/tiktok`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});
   if(!r.ok)throw new Error('TikTok API request failed');
@@ -578,11 +549,7 @@ async function callTikTokApi(url){
 }
 async function callKceySocial(type,url){
   for(const ep of [`/api/${type}`,`https://api.kcey.online/api/${type}`]){
-    try{
-      const sep=ep.includes('?')?'&':'?';
-      const r=await fetch(`${ep}${sep}url=${encodeURIComponent(url)}${ep.startsWith('http')?`&key=${API_KEY}`:''}`);
-      if(r.ok){const d=await r.json();if(d&&d.status!==false)return d;}
-    }catch(_){}
+    try{const sep=ep.includes('?')?'&':'?';const r=await fetch(`${ep}${sep}url=${encodeURIComponent(url)}${ep.startsWith('http')?`&key=${API_KEY}`:''}`);if(r.ok){const d=await r.json();if(d&&d.status!==false)return d;}}catch(_){}
   }
   throw new Error(`${type} API request failed`);
 }
@@ -616,8 +583,7 @@ async function callYtmp4New(url){
   if(!r.ok)throw new Error('YT MP4 API request failed');
   const d=await r.json();
   if(!d.success||!Array.isArray(d.result)||!d.result.length)throw new Error(d.message||'No download links found');
-  d._info=info;
-  return d;
+  d._info=info;return d;
 }
 async function callPinterestApi(url){
   const r=await fetch(`${PINTEREST_BASE}?url=${encodeURIComponent(url)}&apikey=${PINTEREST_KEY}`);
@@ -632,7 +598,6 @@ async function callSpotifyApi(url){
   if(!d||d.status===false){const r=await fetch(`${DARKSHAN_BASE}/download/spotify?url=${encodeURIComponent(url)}&api_key=${DARKSHAN_KEY}`);if(!r.ok)throw new Error('Spotify API request failed');d=await r.json();}
   return d;
 }
-
 async function callApi(key,url){
   const p=PLATFORMS[key];
   if(!p)throw new Error('Unsupported platform');
@@ -644,7 +609,6 @@ async function callApi(key,url){
   if(p.method==='DARKSHAN')return callSpotifyApi(url);
   throw new Error('Unknown method');
 }
-
 async function handleDownload(){
   const url=input.value.trim();
   if(!url){showStatus('error','Please paste a link first');input.focus();return;}
@@ -652,22 +616,16 @@ async function handleDownload(){
   resultEl.className='';resultEl.innerHTML='';
   showStatus('loading',`Fetching ${PLATFORMS[currentPlatform].label} details...`);
   setLoading(true);
-  try{
-    const data=await callApi(currentPlatform,url);
-    showStatus('none');
-    PLATFORMS[currentPlatform].render(data);
-  }catch(err){
-    showStatus('error',err.message||'Something went wrong. Please try again.');
-  }finally{setLoading(false);}
+  try{const data=await callApi(currentPlatform,url);showStatus('none');PLATFORMS[currentPlatform].render(data);}
+  catch(err){showStatus('error',err.message||'Something went wrong. Please try again.');}
+  finally{setLoading(false);}
 }
-
 downloadBtn.addEventListener('click',handleDownload);
 input.addEventListener('keydown',e=>{if(e.key==='Enter')handleDownload();});
 pasteBtn.addEventListener('click',async()=>{
   try{const t=await navigator.clipboard.readText();if(t){input.value=t.trim();platformUrls[currentPlatform]=input.value;input.focus();}}
   catch{input.focus();showStatus('error','Cannot access clipboard — paste manually');}
 });
-
 initTheme();
 setPlatform('facebook',true);
 input.focus();
