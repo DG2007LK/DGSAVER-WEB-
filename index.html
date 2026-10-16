@@ -135,6 +135,62 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast svg{width:16px;height:16px;color:var(--ok);flex:none}
 .dl .go .spinner{width:11px;height:11px;border-width:2px;border-top-color:#fff;border-color:rgba(255,255,255,.3);border-top-color:#fff}
+
+/* ================= AD BOXES ================= */
+.ad-box{
+  position:relative;
+  z-index:1;
+  width:100%;
+  margin:26px 0;
+  padding:14px 14px 12px;
+  background:var(--card);
+  border:1px dashed var(--line-2);
+  border-radius:16px;
+  min-height:90px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  transition:border-color .3s;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.ad-box:hover{border-color:rgba(124,92,255,.35)}
+.ad-box .ad-tag{
+  position:absolute;
+  top:6px;left:50%;
+  transform:translateX(-50%);
+  font-size:8.5px;
+  letter-spacing:1.6px;
+  font-weight:800;
+  color:var(--txt-dim);
+  opacity:.6;
+  background:var(--bg);
+  padding:0 8px;
+  border-radius:4px;
+  pointer-events:none;
+}
+.ad-box .ad-inner{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:60px;
+  text-align:center;
+}
+.ad-box .ad-placeholder{
+  color:var(--txt-dim);
+  font-size:11.5px;
+  font-weight:500;
+  line-height:1.6;
+  padding:8px;
+  letter-spacing:.2px;
+}
+.ad-box .ad-placeholder b{color:var(--mut);font-weight:700}
+.ad-box-sm{min-height:70px;padding:10px}
+.ad-box-sm .ad-inner{min-height:44px}
+.ad-box-lg{min-height:120px}
 </style>
 </head>
 <body>
@@ -188,9 +244,32 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
   <div id="status"></div>
   <div id="result"></div>
 
+  <!-- ============================================================ -->
+  <!-- ✅ AD BOX 1 — Below Download button (between card & How It Works) -->
+  <!-- ============================================================ -->
+  <div class="ad-box ad-box-sm" id="adBox1">
+    <span class="ad-tag">SPONSORED</span>
+    <div class="ad-inner">
+      <!-- 👇 PASTE YOUR IN-PAGE PUSH / BANNER AD SCRIPT HERE 👇 -->
+      <div class="ad-placeholder"><b>Ad Space</b><br>Paste your In-Page Push / Banner ad code here</div>
+    </div>
+  </div>
+
   <section class="howto">
     <h2>How <span class="grad">It Works</span></h2>
     <p class="lead">Four simple steps to download any video from any platform</p>
+
+    <!-- ============================================================ -->
+    <!-- ✅ AD BOX 2 — Between "How It Works" lead & step 01 -->
+    <!-- ============================================================ -->
+    <div class="ad-box ad-box-sm" id="adBox2">
+      <span class="ad-tag">SPONSORED</span>
+      <div class="ad-inner">
+        <!-- 👇 PASTE YOUR IN-PAGE PUSH / BANNER AD SCRIPT HERE 👇 -->
+        <div class="ad-placeholder"><b>Ad Space</b><br>Paste your In-Page Push / Banner ad code here</div>
+      </div>
+    </div>
+
     <div class="steps">
       <div class="step"><div class="step-num">01</div><h3>Pick a Platform</h3><p>Choose the social media platform you want to download from using the icons above.</p></div>
       <div class="step"><div class="step-num">02</div><h3>Paste Your Link</h3><p>Copy the video URL from the app or browser and paste it into the input field.</p></div>
@@ -198,6 +277,18 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
       <div class="step"><div class="step-num">04</div><h3>Save Your File</h3><p>Select your preferred quality or format, and the file will download automatically.</p></div>
     </div>
   </section>
+
+  <!-- ============================================================ -->
+  <!-- ✅ AD BOX 3 — Below step 04 / bottom of the page -->
+  <!-- ============================================================ -->
+  <div class="ad-box ad-box-sm" id="adBox3">
+    <span class="ad-tag">SPONSORED</span>
+    <div class="ad-inner">
+      <!-- 👇 PASTE YOUR IN-PAGE PUSH / BANNER AD SCRIPT HERE 👇 -->
+      <div class="ad-placeholder"><b>Ad Space</b><br>Paste your In-Page Push / Banner ad code here</div>
+    </div>
+  </div>
+
 </main>
 
 <footer>
@@ -207,7 +298,7 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
 
 <script>
 /* =========================================================
-   DG SAVER — JavaScript
+   DG SAVER — JavaScript (unchanged logic)
    ========================================================= */
 const API_KEY = 'kcey_3aac11b6ed5c49a5b3b0a2a2922a38de4014';
 const TIKTOK_API_BASE = 'https://tiktok-api-new-vercel.vercel.app';
@@ -560,7 +651,7 @@ input.focus();
 </script>
 
 <!-- ========================================================= -->
-<!-- ✅ VIGNETTE AD SCRIPT (full-screen interstitial, auto) -->
+<!-- ✅ VIGNETTE AD (full-screen popup — auto trigger) -->
 <!-- ========================================================= -->
 <script>(function(s){s.dataset.zone='12048822',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
