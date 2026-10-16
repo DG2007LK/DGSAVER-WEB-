@@ -135,50 +135,6 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast svg{width:16px;height:16px;color:var(--ok);flex:none}
 .dl .go .spinner{width:11px;height:11px;border-width:2px;border-top-color:#fff;border-color:rgba(255,255,255,.3);border-top-color:#fff}
-
-/* ============ AD SLOT STYLES ============ */
-.ad-slot{
-  position:relative;
-  z-index:1;
-  width:100%;
-  max-width:680px;
-  margin:28px auto;
-  padding:0 20px;
-  min-height:60px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:14px;
-  overflow:hidden;
-  transition:all .3s;
-}
-.ad-slot::before{
-  content:'SPONSORED';
-  position:absolute;
-  top:6px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:8.5px;
-  letter-spacing:1.5px;
-  font-weight:800;
-  color:var(--txt-dim);
-  opacity:.55;
-  pointer-events:none;
-}
-.ad-slot iframe,
-.ad-slot ins,
-.ad-slot img{
-  max-width:100% !important;
-  border-radius:10px !important;
-  display:block;
-}
-.ad-slot-bottom{
-  margin-top:30px;
-  margin-bottom:10px;
-  min-height:50px;
-  opacity:.9;
-}
-.ad-slot-bottom::before{content:'ADS'}
 </style>
 </head>
 <body>
@@ -232,13 +188,6 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
   <div id="status"></div>
   <div id="result"></div>
 
-  <!-- ===================================================== -->
-  <!-- ✅ AD SLOT 1: ABOVE "HOW IT WORKS" -->
-  <!-- ===================================================== -->
-  <div class="ad-slot" id="adSlotTop">
-    <script>(function(s){s.dataset.zone='12048751',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-  </div>
-
   <section class="howto">
     <h2>How <span class="grad">It Works</span></h2>
     <p class="lead">Four simple steps to download any video from any platform</p>
@@ -249,14 +198,6 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
       <div class="step"><div class="step-num">04</div><h3>Save Your File</h3><p>Select your preferred quality or format, and the file will download automatically.</p></div>
     </div>
   </section>
-
-  <!-- ===================================================== -->
-  <!-- ✅ AD SLOT 2: BELOW "HOW IT WORKS" -->
-  <!-- ===================================================== -->
-  <div class="ad-slot" id="adSlotMiddle">
-    <script>(function(s){s.dataset.zone='12048751',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-  </div>
-
 </main>
 
 <footer>
@@ -264,16 +205,9 @@ footer p{font-size:11.5px;color:var(--txt-dim);line-height:1.7;font-weight:500}
   <p>© 2025 DG SAVER · All rights reserved<br>For personal use only. All trademarks belong to their respective owners.</p>
 </footer>
 
-<!-- ===================================================== -->
-<!-- ✅ AD SLOT 3: VERY BOTTOM OF THE PAGE -->
-<!-- ===================================================== -->
-<div class="ad-slot ad-slot-bottom" id="adSlotBottom">
-  <script>(function(s){s.dataset.zone='12048751',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-</div>
-
 <script>
 /* =========================================================
-   DG SAVER — JavaScript (all previous logic kept intact)
+   DG SAVER — JavaScript
    ========================================================= */
 const API_KEY = 'kcey_3aac11b6ed5c49a5b3b0a2a2922a38de4014';
 const TIKTOK_API_BASE = 'https://tiktok-api-new-vercel.vercel.app';
@@ -329,17 +263,14 @@ const SVG_VIDEO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 const SVG_IMAGE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
 const SVG_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 
-/* THEME */
 function setTheme(t){htmlEl.setAttribute('data-theme',t);localStorage.setItem('dgsaver-theme',t);const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',t==='light'?'#f5f6fb':'#07080f');}
 function initTheme(){const s=localStorage.getItem('dgsaver-theme');if(s==='light'||s==='dark'){setTheme(s);return;}setTheme(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');}
 themeBtn.addEventListener('click',()=>setTheme(htmlEl.getAttribute('data-theme')==='dark'?'light':'dark'));
 
-/* PLATFORM SWITCH */
 function setPlatform(name,skipSave){if(!PLATFORMS[name])return;if(!skipSave&&currentPlatform)platformUrls[currentPlatform]=input.value;currentPlatform=name;input.value=platformUrls[name]||'';platformsEl.querySelectorAll('.platform-btn').forEach(b=>b.classList.toggle('active',b.dataset.p===name));resultEl.className='';resultEl.innerHTML='';showStatus('none');}
 platformsEl.addEventListener('click',e=>{const btn=e.target.closest('.platform-btn');if(!btn)return;if(btn.dataset.p===currentPlatform)return;setPlatform(btn.dataset.p);input.focus();});
 input.addEventListener('input',()=>{platformUrls[currentPlatform]=input.value;});
 
-/* HELPERS */
 function showStatus(type,msg){if(!type||type==='none'){statusEl.className='';statusEl.innerHTML='';return;}statusEl.className='show';if(type==='loading')statusEl.innerHTML=`<div class="status-box load"><div class="spinner"></div><div>${msg}</div></div>`;else if(type==='error')statusEl.innerHTML=`<div class="status-box err"><div>⚠️</div><div>${msg}</div></div>`;}
 function setLoading(on){downloadBtn.disabled=on;downloadBtn.classList.toggle('loading',on);downloadBtnText.textContent=on?'Loading...':'Download';}
 function fmtNum(n){n=Number(n)||0;if(n>=1e9)return (n/1e9).toFixed(1).replace('.0','')+'B';if(n>=1e6)return (n/1e6).toFixed(1).replace('.0','')+'M';if(n>=1e3)return (n/1e3).toFixed(1).replace('.0','')+'K';return String(n);}
@@ -354,7 +285,6 @@ function getYouTubeId(url){if(!url)return null;const m=String(url).match(/(?:you
 function hasAudioTrack(url){if(!url)return false;const s=String(url);if(/[?&]itag=18([&]|$)/.test(s))return true;if(/[?&]itag=22([&]|$)/.test(s))return true;if(/ratebypass=yes/.test(s))return true;return false;}
 function toast(msg,ok){const el=document.createElement('div');el.className='toast';el.innerHTML=(ok?SVG_CHECK:'⚠️')+`<span>${esc(msg)}</span>`;document.body.appendChild(el);requestAnimationFrame(()=>el.classList.add('show'));setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),320);},2600);}
 
-/* DOWNLOAD HELPERS */
 function needsProxy(url){try{const host=new URL(url).hostname.toLowerCase();return CORS_BLOCKED_HOSTS.some(h=>host.includes(h));}catch(_){return false;}}
 function guessFilename(url,fallback){
   try{
@@ -407,7 +337,6 @@ document.addEventListener('click',e=>{
   directDownload(link.href,link,safe);
 });
 
-/* RENDERERS */
 function renderFacebook(data){
   const md=data.metadata||{},dl=data.downloads||{};
   const links=Array.isArray(dl.links)?dl.links:[];
@@ -539,7 +468,6 @@ function renderSpotify(data){
   showResult(html);
 }
 
-/* API CALLS */
 async function callTikTokApi(url){
   const r=await fetch(`${TIKTOK_API_BASE}/api/download/tiktok`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url})});
   if(!r.ok)throw new Error('TikTok API request failed');
@@ -630,5 +558,11 @@ initTheme();
 setPlatform('facebook',true);
 input.focus();
 </script>
+
+<!-- ========================================================= -->
+<!-- ✅ VIGNETTE AD SCRIPT (full-screen interstitial, auto) -->
+<!-- ========================================================= -->
+<script>(function(s){s.dataset.zone='12048822',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
 </body>
 </html>
